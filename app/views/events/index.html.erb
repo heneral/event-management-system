@@ -180,10 +180,14 @@
 
     <!-- Load More Button -->
     <% if @has_more_events %>
-      <div class="text-center mt-4" id="load-more-container">
-        <button id="load-more-btn" class="btn btn-primary btn-lg px-5 py-3">
-          <i class="fas fa-eye me-2"></i>Discover More Events
-          <i class="fas fa-arrow-down ms-2"></i>
+      <div class="text-center mt-5" id="load-more-container">
+        <button id="load-more-btn" class="discover-btn">
+          <span class="discover-text">Discover More Events</span>
+          <div class="discover-arrow">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7 13L12 18L17 13M12 6V18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
         </button>
       </div>
     <% end %>
