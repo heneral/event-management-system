@@ -27,7 +27,7 @@
               <h5 class="card-title text-dark mb-3">Tech Conference 2025</h5>
               <p class="card-text text-muted small mb-2"><i class="fas fa-clock me-2"></i>Jan 15, 2025 • 9:00 AM</p>
               <p class="card-text text-muted small mb-3"><i class="fas fa-map-marker-alt me-2"></i>San Francisco Convention Center</p>
-              <button class="btn btn-primary w-100">Get Tickets</button>
+              <%= link_to "Get Tickets", "#events-section", class: "btn btn-primary w-100" %>
             </div>
           </div>
           <div class="floating-elements">
@@ -189,15 +189,6 @@
             </svg>
           </div>
         </button>
-      </div>
-    <% end %>
-
-    <!-- Create Event CTA -->
-    <% if user_signed_in? %>
-      <div class="text-center mt-5">
-        <%= link_to new_event_path, class: "btn btn-primary btn-lg px-5" do %>
-          <i class="fas fa-plus me-2"></i>Create New Event
-        <% end %>
       </div>
     <% end %>
   <% else %>

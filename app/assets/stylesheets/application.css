@@ -650,12 +650,12 @@
 
 /* Load More Button */
 .discover-btn {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border: none;
-  padding: 1.25rem 2.5rem;
+  background: transparent;
+  border: 2px solid #0d6efd;
+  padding: 0.75rem 1.5rem;
   font-size: 1.1rem;
   font-weight: 600;
-  color: #ffffff;
+  color: #0d6efd;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
@@ -664,31 +664,26 @@
   gap: 0.75rem;
   text-decoration: none;
   outline: none;
-  border-radius: 0;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  border-radius: 5px;
+  box-shadow: none;
   letter-spacing: 0.5px;
   overflow: hidden;
 }
 
 .discover-btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s;
+  display: none;
 }
 
 .discover-btn:hover::before {
-  left: 100%;
+  display: none;
 }
 
 .discover-btn:hover {
-  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  background: #0d6efd;
+  border-color: #0d6efd;
+  color: #ffffff;
   transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+  box-shadow: none;
 }
 
 .discover-btn:active {
@@ -725,7 +720,7 @@
 .discover-arrow svg {
   width: 100%;
   height: 100%;
-  stroke: #ffffff;
+  stroke: #0d6efd;
 }
 
 .discover-btn:hover .discover-arrow svg {
@@ -765,7 +760,7 @@
 /* Responsive Design for Load More Button */
 @media (max-width: 768px) {
   .discover-btn {
-    padding: 1rem 2rem;
+    padding: 0.625rem 1.25rem;
     font-size: 1rem;
   }
 
@@ -820,11 +815,11 @@
 /* Load More Button Styles */
 #load-more-btn {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border: none;
-  border-radius: 0;
+  border: 2px solid #0d6efd;
+  border-radius: 5px;
   font-weight: 600;
   letter-spacing: 0.5px;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  box-shadow: none;
   position: relative;
   overflow: hidden;
 }
@@ -845,14 +840,16 @@
 }
 
 #load-more-btn:hover {
-  background: linear-gradient(135deg, #5a67d8 0%, #4c51bf 100%);
+  background: #0d6efd;
+  border-color: #0d6efd;
+  color: #ffffff;
   transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+  box-shadow: none;
 }
 
 #load-more-btn:active {
   transform: translateY(-1px);
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  box-shadow: none;
 }
 
 #load-more-btn i {
