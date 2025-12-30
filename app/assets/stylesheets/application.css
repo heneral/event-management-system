@@ -648,11 +648,180 @@
   }
 }
 
+/* Load More Button */
+.discover-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  padding: 1.25rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  outline: none;
+  border-radius: 0;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  letter-spacing: 0.5px;
+  overflow: hidden;
+}
+
+.discover-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.discover-btn:hover::before {
+  left: 100%;
+}
+
+.discover-btn:hover {
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+.discover-btn:active {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.discover-text {
+  position: relative;
+  z-index: 1;
+  letter-spacing: 0.025em;
+  font-weight: 600;
+}
+
+.discover-btn:hover .discover-text {
+  color: #ffffff;
+}
+
+.discover-arrow {
+  position: relative;
+  z-index: 1;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.discover-btn:hover .discover-arrow {
+  transform: translateX(2px);
+}
+
+.discover-arrow svg {
+  width: 100%;
+  height: 100%;
+  stroke: #ffffff;
+}
+
+.discover-btn:hover .discover-arrow svg {
+  stroke: #ffffff;
+}
+
+/* Alternative minimalist version - uncomment to use */
+/*
+.discover-btn {
+  background: transparent;
+  border: 1px solid #e2e8f0;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  outline: none;
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+}
+
+.discover-btn:hover {
+  border-color: #6366f1;
+  color: #6366f1;
+  background: rgba(99, 102, 241, 0.05);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
+}
+*/
+
+/* Responsive Design for Load More Button */
+@media (max-width: 768px) {
+  .discover-btn {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+  }
+
+  .discover-text {
+    font-size: 1rem;
+  }
+}
+
+/* Login Modal Styles */
+.modal-content {
+  border-radius: 12px;
+  border: none;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+  border-bottom: 1px solid #e9ecef;
+  border-radius: 12px 12px 0 0;
+}
+
+.modal-body {
+  padding: 2rem;
+}
+
+.login-form .form-control {
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  padding: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.login-form .form-control:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.login-form .btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.login-form .btn-primary:hover {
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
 /* Load More Button Styles */
 #load-more-btn {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   border: none;
-  border-radius: 50px;
+  border-radius: 0;
   font-weight: 600;
   letter-spacing: 0.5px;
   box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
