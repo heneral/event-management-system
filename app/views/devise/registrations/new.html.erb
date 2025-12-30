@@ -1,0 +1,143 @@
+<div class="h-auto">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Left Column -->
+      <div class="col-lg-6 d-none d-lg-flex align-items-start justify-content-center pt-5 pb-5 position-relative">
+        <div class="text-center position-relative" style="width: 100%;">
+          <%= image_tag "people-taking-part-high-protocol-event.jpg", class: "img-fluid rounded-3 shadow", style: "width: 100%; object-fit: contain; transition: transform 0.3s ease;", alt: "Events" %>
+          <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center rounded-3" style="background: rgba(0, 0, 0, 0.4);">
+            <div class="text-white text-center">
+              <h2 class="display-5 fw-bold mb-3">Join EventHub</h2>
+              <p class="lead">Create amazing events and connect with your community</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column - Form Section -->
+      <div class="col-lg-6 d-flex align-items-start justify-content-center p-4 pb-5 pt-5">
+        <div class="w-100" style="max-width: 500px;">
+          <!-- Mobile Header (shown only on small screens) -->
+          <div class="text-center mb-4 d-lg-none">
+            <i class="fas fa-users fa-3x text-primary mb-3"></i>
+            <h2 class="h4 fw-bold text-dark mb-2">Join EventHub</h2>
+            <p class="text-muted">Create your account and start discovering amazing events</p>
+          </div>
+
+          <!-- Form Card -->
+          <div class="card shadow-lg border-0 rounded-4 overflow-hidden bg-white">
+            <div class="card-body p-4 p-md-5">
+              <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "needs-validation", novalidate: true }) do |f| %>
+                <%= render "devise/shared/error_messages", resource: resource %>
+
+                <!-- Email Field -->
+                <div class="mb-4">
+                  <label for="user_email" class="form-label fw-semibold text-dark mb-3">
+                    <i class="fas fa-envelope text-primary me-2"></i>Email Address
+                  </label>
+                  <div class="input-group">
+                    <input type="email" class="form-control border-end-0 ps-3" placeholder="Enter your email address" required>
+                    <span class="input-group-text bg-light">
+                      <i class="fas fa-envelope text-muted"></i>
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Password Field -->
+                <div class="mb-4">
+                  <label for="user_password" class="form-label fw-semibold text-dark mb-3">
+                    <i class="fas fa-lock text-primary me-2"></i>Password
+                    <% if @minimum_password_length %>
+                      <small class="text-muted ms-1">(<%= @minimum_password_length %> characters minimum)</small>
+                    <% end %>
+                  </label>
+                  <div class="input-group">
+                    <input type="password" class="form-control border-end-0 ps-3" placeholder="Create a strong password" required>
+                    <span class="input-group-text bg-light">
+                      <i class="fas fa-lock text-muted"></i>
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Password Confirmation Field -->
+                <div class="mb-4">
+                  <label for="user_password_confirmation" class="form-label fw-semibold text-dark mb-3">
+                    <i class="fas fa-lock text-primary me-2"></i>Confirm Password
+                  </label>
+                  <div class="input-group">
+                    <input type="password" class="form-control border-end-0 ps-3" placeholder="Confirm your password" required>
+                    <span class="input-group-text bg-light">
+                      <i class="fas fa-lock text-muted"></i>
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Terms and Conditions -->
+                <div class="mb-4">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="termsCheck" required>
+                    <label class="form-check-label text-muted small">
+                      I agree to the <a href="#" class="text-primary text-decoration-none fw-semibold">Terms of Service</a> and <a href="#" class="text-primary text-decoration-none fw-semibold">Privacy Policy</a>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="d-grid mb-4">
+                  <button type="submit" class="btn btn-primary btn-sm rounded-3 fw-semibold" data-disable-with="Creating Account...">
+                    <i class="fas fa-user-plus me-2"></i>Create Account
+                  </button>
+                </div>
+              <% end %>
+            </div>
+
+            <!-- Footer Section -->
+            <div class="card-footer bg-light border-0 text-center py-4">
+              <p class="text-muted mb-3">Already have an account?</p>
+              <%= link_to "Sign In Instead", new_session_path(resource_name),
+                class: "btn btn-outline-primary px-4 py-2 rounded-3 fw-semibold" %>
+            </div>
+          </div>
+
+          <!-- Additional Info -->
+          <div class="text-center mt-4">
+            <small class="text-muted">
+              Join thousands of event organizers and attendees
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.input-group-text {
+  border-radius: 0.375rem 0 0 0.375rem !important;
+}
+
+.form-control:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
+  transition: all 0.3s ease;
+}
+
+.invalid-feedback {
+  display: none;
+}
+
+.was-validated .form-control:invalid ~ .invalid-feedback {
+  display: block;
+}
+
+@media (max-width: 991.98px) {
+  .min-vh-100 {
+    min-height: auto !important;
+  }
+}
+</style>
