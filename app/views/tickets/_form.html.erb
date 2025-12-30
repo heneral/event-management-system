@@ -1,0 +1,26 @@
+<%= form_with(model: ticket, class: "mb-4") do |form| %>
+  <% if ticket.errors.any? %>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(ticket.errors.count, "error") %> prohibited this ticket from being saved:</h4>
+      <ul class="mb-0">
+        <% ticket.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :event_id, class: "form-label" %>
+    <%= form.collection_select :event_id, Event.all, :id, :title, { prompt: "Select an event" }, class: "form-select" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :quantity, class: "form-label" %>
+    <%= form.number_field :quantity, class: "form-control", min: 1 %>
+  </div>
+
+  <div>
+    <%= form.submit class: "btn btn-success" %>
+  </div>
+<% end %>

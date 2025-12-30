@@ -1,0 +1,420 @@
+<div class="hero-section bg-gradient-primary text-white py-5 mb-5">
+  <div class="container-fluid">
+    <div class="row align-items-center min-vh-50">
+      <div class="col-lg-7 ps-lg-5">
+        <h1 class="display-3 fw-bold mb-4">Discover & Create<br><span class="text-warning">Amazing Events</span></h1>
+        <p class="lead mb-4 fs-5">Connect with your community through unforgettable experiences. From tech conferences to local meetups, find and create events that bring people together.</p>
+        <div class="d-flex flex-column flex-sm-row gap-3">
+          <% if user_signed_in? %>
+            <%= link_to "Create New Event", new_event_path, class: "btn btn-warning btn-lg px-4 py-3 fw-bold" %>
+            <%= link_to "Browse All Events", "#events-section", class: "btn btn-outline-light btn-lg px-4 py-3" %>
+          <% else %>
+            <%= link_to "Get Started Free", new_user_registration_path, class: "btn btn-warning btn-lg px-4 py-3 fw-bold" %>
+            <%= link_to "Sign In", new_user_session_path, class: "btn btn-outline-light btn-lg px-4 py-3" %>
+          <% end %>
+        </div>
+        <div class="mt-4">
+          <small class="text-light opacity-75">Join thousands of event organizers and attendees</small>
+        </div>
+      </div>
+      <div class="col-lg-5 text-center mt-5 mt-lg-0">
+        <div class="hero-illustration">
+          <div class="floating-card card shadow-lg border-0 mx-auto" style="max-width: 300px;">
+            <div class="card-body p-4">
+              <div class="text-center mb-3">
+                <i class="fas fa-calendar-check fa-3x text-primary"></i>
+              </div>
+              <h5 class="card-title text-dark mb-3">Tech Conference 2025</h5>
+              <p class="card-text text-muted small mb-2"><i class="fas fa-clock me-2"></i>Jan 15, 2025 • 9:00 AM</p>
+              <p class="card-text text-muted small mb-3"><i class="fas fa-map-marker-alt me-2"></i>San Francisco Convention Center</p>
+              <button class="btn btn-primary w-100">Get Tickets</button>
+            </div>
+          </div>
+          <div class="floating-elements">
+            <div class="floating-icon icon-1"><i class="fas fa-users text-warning"></i></div>
+            <div class="floating-icon icon-2"><i class="fas fa-star text-success"></i></div>
+            <div class="floating-icon icon-3"><i class="fas fa-rocket text-info"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container" id="events-section">
+  <!-- Events Header Section -->
+  <div class="events-header text-center mb-5">
+    <h2 class="display-5 fw-bold text-dark mb-3">Upcoming Events</h2>
+    <p class="lead text-muted mb-4">Discover exciting events in your community</p>
+
+    <!-- Event Stats -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-auto">
+        <div class="stat-card bg-light rounded-pill px-4 py-2 d-flex align-items-center">
+          <i class="fas fa-calendar-alt text-primary me-2"></i>
+          <span class="fw-semibold"><%= @events.count %> Events Available</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <% if @events.any? %>
+    <div class="row g-4" id="events-container">
+      <% @initial_events.each do |event| %>
+        <div class="col-lg-3 col-md-6 col-sm-12 event-item">
+          <div class="card h-100 border-0 shadow-sm event-card">
+            <div class="card-body d-flex flex-column p-0">
+              <!-- Event Image -->
+              <div class="event-image-container">
+                <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&h=200&fit=crop&crop=center" alt="<%= event.title %>" class="event-image">
+                <div class="event-image-overlay">
+                  <span class="badge bg-primary">Featured</span>
+                </div>
+              </div>
+
+              <!-- Event Content -->
+              <div class="p-4">
+                <!-- Event Title -->
+                <h5 class="card-title fw-bold text-dark mb-3"><%= event.title %></h5>
+
+                <!-- Event Description -->
+                <p class="card-text text-muted mb-4 flex-grow-1"><%= truncate(event.description, length: 100) %></p>
+
+                <!-- Event Details -->
+                <div class="event-details mb-4">
+                  <div class="d-flex align-items-center mb-2">
+                    <i class="fas fa-calendar text-primary me-3"></i>
+                    <div>
+                      <div class="fw-semibold small"><%= event.date.strftime('%B %d, %Y') %></div>
+                      <div class="text-muted small"><%= event.date.strftime('%I:%M %p') %></div>
+                    </div>
+                  </div>
+                  <div class="d-flex align-items-center mb-2">
+                    <i class="fas fa-map-marker-alt text-primary me-3"></i>
+                    <div>
+                      <div class="fw-semibold small"><%= event.location %></div>
+                    </div>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <i class="fas fa-user text-primary me-3"></i>
+                    <div>
+                      <div class="text-muted small">by <%= event.organizer.email %></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="mt-auto">
+                  <%= link_to "View Details", event, class: "btn btn-primary w-100 mb-2" %>
+                  <% if user_signed_in? && current_user != event.organizer %>
+                    <%= link_to "Get Tickets", new_ticket_path(event_id: event.id), class: "btn btn-outline-success w-100" %>
+                  <% elsif user_signed_in? && current_user == event.organizer %>
+                    <%= link_to "Manage", edit_event_path(event), class: "btn btn-outline-warning w-100" %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <!-- Hidden additional events -->
+      <% @events.offset(4).each do |event| %>
+        <div class="col-lg-3 col-md-6 col-sm-12 event-item hidden-event" style="display: none;">
+          <div class="card h-100 border-0 shadow-sm event-card">
+            <div class="card-body d-flex flex-column p-0">
+              <!-- Event Image -->
+              <div class="event-image-container">
+                <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&h=200&fit=crop&crop=center" alt="<%= event.title %>" class="event-image">
+                <div class="event-image-overlay">
+                  <span class="badge bg-primary">Featured</span>
+                </div>
+              </div>
+
+              <!-- Event Content -->
+              <div class="p-4">
+                <!-- Event Title -->
+                <h5 class="card-title fw-bold text-dark mb-3"><%= event.title %></h5>
+
+                <!-- Event Description -->
+                <p class="card-text text-muted mb-4 flex-grow-1"><%= truncate(event.description, length: 100) %></p>
+
+                <!-- Event Details -->
+                <div class="event-details mb-4">
+                  <div class="d-flex align-items-center mb-2">
+                    <i class="fas fa-calendar text-primary me-3"></i>
+                    <div>
+                      <div class="fw-semibold small"><%= event.date.strftime('%B %d, %Y') %></div>
+                      <div class="text-muted small"><%= event.date.strftime('%I:%M %p') %></div>
+                    </div>
+                  </div>
+                  <div class="d-flex align-items-center mb-2">
+                    <i class="fas fa-map-marker-alt text-primary me-3"></i>
+                    <div>
+                      <div class="fw-semibold small"><%= event.location %></div>
+                    </div>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <i class="fas fa-user text-primary me-3"></i>
+                    <div>
+                      <div class="text-muted small">by <%= event.organizer.email %></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="mt-auto">
+                  <%= link_to "View Details", event, class: "btn btn-primary w-100 mb-2" %>
+                  <% if user_signed_in? && current_user != event.organizer %>
+                    <%= link_to "Get Tickets", new_ticket_path(event_id: event.id), class: "btn btn-outline-success w-100" %>
+                  <% elsif user_signed_in? && current_user == event.organizer %>
+                    <%= link_to "Manage", edit_event_path(event), class: "btn btn-outline-warning w-100" %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Load More Button -->
+    <% if @has_more_events %>
+      <div class="text-center mt-4" id="load-more-container">
+        <button id="load-more-btn" class="btn btn-primary btn-lg px-5 py-3">
+          <i class="fas fa-eye me-2"></i>Discover More Events
+          <i class="fas fa-arrow-down ms-2"></i>
+        </button>
+      </div>
+    <% end %>
+
+    <!-- Create Event CTA -->
+    <% if user_signed_in? %>
+      <div class="text-center mt-5">
+        <%= link_to new_event_path, class: "btn btn-primary btn-lg px-5" do %>
+          <i class="fas fa-plus me-2"></i>Create New Event
+        <% end %>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="empty-state text-center py-5">
+      <div class="empty-state-icon mb-4">
+        <i class="fas fa-calendar-times fa-4x text-muted"></i>
+      </div>
+      <h3 class="text-muted mb-3">No events yet</h3>
+      <p class="text-muted mb-4">Be the first to create an amazing event in your community!</p>
+      <% if user_signed_in? %>
+        <%= link_to "Create Your First Event", new_event_path, class: "btn btn-primary btn-lg px-4 py-3" %>
+      <% else %>
+        <%= link_to "Sign Up to Create Events", new_user_registration_path, class: "btn btn-primary btn-lg px-4 py-3" %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<!-- Features Section -->
+<section class="features-section">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="display-5 fw-bold text-dark mb-3">Why Choose Our Platform?</h2>
+      <p class="lead text-muted">Everything you need to create, manage, and promote your events successfully</p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6">
+        <div class="feature-card card h-100 border-0 shadow-sm text-center p-4">
+          <div class="feature-icon mb-3">
+            <i class="fas fa-calendar-plus fa-3x text-primary"></i>
+          </div>
+          <h5 class="card-title fw-bold">Easy Event Creation</h5>
+          <p class="card-text text-muted">Create and customize your events in minutes with our intuitive interface</p>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="feature-card card h-100 border-0 shadow-sm text-center p-4">
+          <div class="feature-icon mb-3">
+            <i class="fas fa-ticket-alt fa-3x text-success"></i>
+          </div>
+          <h5 class="card-title fw-bold">Smart Ticketing</h5>
+          <p class="card-text text-muted">Seamless ticket management with instant confirmations and easy check-in</p>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="feature-card card h-100 border-0 shadow-sm text-center p-4">
+          <div class="feature-icon mb-3">
+            <i class="fas fa-users fa-3x text-info"></i>
+          </div>
+          <h5 class="card-title fw-bold">Community Building</h5>
+          <p class="card-text text-muted">Connect with attendees and build lasting relationships in your community</p>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="feature-card card h-100 border-0 shadow-sm text-center p-4">
+          <div class="feature-icon mb-3">
+            <i class="fas fa-chart-line fa-3x text-warning"></i>
+          </div>
+          <h5 class="card-title fw-bold">Analytics & Insights</h5>
+          <p class="card-text text-muted">Track attendance, engagement, and make data-driven decisions</p>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="feature-card card h-100 border-0 shadow-sm text-center p-4">
+          <div class="feature-icon mb-3">
+            <i class="fas fa-mobile-alt fa-3x text-danger"></i>
+          </div>
+          <h5 class="card-title fw-bold">Mobile Friendly</h5>
+          <p class="card-text text-muted">Manage events on-the-go with our responsive mobile interface</p>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="feature-card card h-100 border-0 shadow-sm text-center p-4">
+          <div class="feature-icon mb-3">
+            <i class="fas fa-shield-alt fa-3x text-secondary"></i>
+          </div>
+          <h5 class="card-title fw-bold">Secure & Reliable</h5>
+          <p class="card-text text-muted">Your data is protected with enterprise-grade security measures</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="how-it-works-section">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="display-5 fw-bold text-dark mb-3">How It Works</h2>
+      <p class="lead text-muted">Get started in just three simple steps</p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <div class="step-card text-center">
+          <div class="step-number mb-3">
+            <span class="badge bg-primary rounded-pill fs-4 px-3 py-2">1</span>
+          </div>
+          <div class="step-icon mb-3">
+            <i class="fas fa-user-plus fa-3x text-primary"></i>
+          </div>
+          <h5 class="fw-bold mb-3">Create Your Account</h5>
+          <p class="text-muted">Sign up for free and join our community of event organizers and attendees</p>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="step-card text-center">
+          <div class="step-number mb-3">
+            <span class="badge bg-primary rounded-pill fs-4 px-3 py-2">2</span>
+          </div>
+          <div class="step-icon mb-3">
+            <i class="fas fa-calendar-plus fa-3x text-primary"></i>
+          </div>
+          <h5 class="fw-bold mb-3">Create Your Event</h5>
+          <p class="text-muted">Set up your event details, date, location, and ticket information</p>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="step-card text-center">
+          <div class="step-number mb-3">
+            <span class="badge bg-primary rounded-pill fs-4 px-3 py-2">3</span>
+          </div>
+          <div class="step-icon mb-3">
+            <i class="fas fa-share fa-3x text-primary"></i>
+          </div>
+          <h5 class="fw-bold mb-3">Share & Promote</h5>
+          <p class="text-muted">Share your event with your network and watch attendees sign up</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Statistics Section -->
+<section class="stats-section">
+  <div class="container">
+    <div class="row text-center g-4">
+      <div class="col-lg-3 col-md-6">
+        <div class="stat-item">
+          <div class="stat-number display-4 fw-bold mb-2">500+</div>
+          <div class="stat-label">Events Created</div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="stat-item">
+          <div class="stat-number display-4 fw-bold mb-2">10K+</div>
+          <div class="stat-label">Happy Attendees</div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="stat-item">
+          <div class="stat-number display-4 fw-bold mb-2">50+</div>
+          <div class="stat-label">Cities Covered</div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="stat-item">
+          <div class="stat-number display-4 fw-bold mb-2">99%</div>
+          <div class="stat-label">Satisfaction Rate</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Newsletter Section -->
+<section class="newsletter-section">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <h3 class="fw-bold mb-3">Stay Updated</h3>
+        <p class="text-muted mb-4">Get notified about new events, platform updates, and exclusive offers</p>
+      </div>
+      <div class="col-lg-6">
+        <div class="newsletter-form">
+          <div class="input-group">
+            <input type="email" class="form-control form-control-lg" placeholder="Enter your email address" aria-label="Email address">
+            <button class="btn btn-primary btn-lg" type="button">Subscribe</button>
+          </div>
+          <small class="text-muted mt-2 d-block">We respect your privacy. Unsubscribe at any time.</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const loadMoreBtn = document.getElementById('load-more-btn');
+  const loadMoreContainer = document.getElementById('load-more-container');
+  const hiddenEvents = document.querySelectorAll('.hidden-event');
+
+  if (loadMoreBtn) {
+    loadMoreBtn.addEventListener('click', function() {
+      // Show hidden events with animation
+      hiddenEvents.forEach((event, index) => {
+        setTimeout(() => {
+          event.style.display = 'block';
+          event.style.opacity = '0';
+          event.style.transform = 'translateY(20px)';
+
+          // Animate in
+          setTimeout(() => {
+            event.style.transition = 'all 0.3s ease';
+            event.style.opacity = '1';
+            event.style.transform = 'translateY(0)';
+          }, 50);
+        }, index * 100); // Stagger animation
+      });
+
+      // Hide the load more button
+      loadMoreContainer.style.display = 'none';
+    });
+  }
+});
+</script>

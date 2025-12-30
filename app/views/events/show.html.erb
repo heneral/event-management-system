@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-body">
+        <h1 class="card-title"><%= @event.title %></h1>
+        <p class="card-text"><%= @event.description %></p>
+        <p class="card-text"><strong>Date:</strong> <%= @event.date.strftime('%B %d, %Y at %I:%M %p') %></p>
+        <p class="card-text"><strong>Location:</strong> <%= @event.location %></p>
+        <p class="card-text"><strong>Organizer:</strong> <%= @event.organizer.email %></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <% if user_signed_in? %>
+      <% if current_user == @event.organizer %>
+        <div class="d-grid gap-2">
+          <%= link_to "Edit Event", edit_event_path(@event), class: "btn btn-warning" %>
+          <%= button_to "Delete Event", @event, method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
+        </div>
+      <% else %>
+        <%= link_to "Buy Tickets", new_ticket_path(event_id: @event.id), class: "btn btn-success btn-lg" %>
+      <% end %>
+    <% end %>
+    <%= link_to "Back to Events", events_path, class: "btn btn-secondary mt-2" %>
+  </div>
+</div>

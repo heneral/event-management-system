@@ -1,0 +1,13 @@
+Ticket Confirmation
+
+Hi <%= @user.email %>,
+
+You have successfully purchased <%= @ticket.quantity %> ticket(s) for the event "<%= @event.title %>".
+
+Event Details:
+- Title: <%= @event.title %>
+- Description: <%= @event.description %>
+- Date: <%= @event.date %>
+- Location: <%= @event.location %>
+
+Thank you for using our event management system!

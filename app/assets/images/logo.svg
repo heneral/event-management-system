@@ -1,0 +1,30 @@
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="20" cy="20" r="18" fill="url(#gradient)" stroke="#ffffff" stroke-width="1"/>
+
+  <!-- Calendar icon -->
+  <rect x="12" y="14" width="16" height="14" rx="2" fill="#ffffff"/>
+  <rect x="10" y="12" width="20" height="2" rx="1" fill="#ffffff"/>
+  <rect x="14" y="8" width="2" height="4" fill="#ffffff"/>
+  <rect x="24" y="8" width="2" height="4" fill="#ffffff"/>
+
+  <!-- Calendar grid lines -->
+  <line x1="12" y1="18" x2="28" y2="18" stroke="url(#gradient)" stroke-width="1"/>
+  <line x1="16" y1="14" x2="16" y2="28" stroke="url(#gradient)" stroke-width="1"/>
+  <line x1="20" y1="14" x2="20" y2="28" stroke="url(#gradient)" stroke-width="1"/>
+  <line x1="24" y1="14" x2="24" y2="28" stroke="url(#gradient)" stroke-width="1"/>
+
+  <!-- Event dots -->
+  <circle cx="14" cy="20" r="1.5" fill="#ffffff"/>
+  <circle cx="18" cy="24" r="1.5" fill="#ffffff"/>
+  <circle cx="22" cy="20" r="1.5" fill="#ffffff"/>
+  <circle cx="26" cy="24" r="1.5" fill="#ffffff"/>
+
+  <!-- Gradient definitions -->
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+</svg>
